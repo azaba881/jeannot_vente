@@ -43,9 +43,10 @@
                     </div>
                     <div class="col-lg-4 col-sm-6 col-xs-12">
                         <div class="white-box analytics-info">
-                            <h3 class="box-title">Unique Visitor</h3>
+                            
                             <ul class="list-inline two-part">
                                 <li>
+                                    <canvas id="pieChart" class="chartjs-render-monitor"></canvas>
                                     <div id="sparklinedash3"></div>
                                 </li>
                                 <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info">911</span></li>
@@ -85,7 +86,10 @@
                                             <th>PRIX</th>
                                             <th>DATE ET HEURE</th>
                                             <th>VENDEUR</th>
+                                            @if (Auth()->User()->role == "admin")
                                             <th>ACTION</th>
+                                            @endif
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,14 +97,26 @@
                                             
                                         <tr>
                                             <td>{{$vente->id}}</td>
-                                            <td class="txt-oflo">{{$vente->produit}}</td>
+                                            <td class="txt-oflo" style="text-transform:uppercase">{{$vente->produit}}</td>
                                             <td>{{$vente->nombre}}</td>
-                                            <td class="txt-oflo">{{$vente->prix}}</td>
+                                            <td class="txt-oflo">{{$vente->prix}} FCFA</td>
                                             <td><span class="">{{$vente->created_at}}</span></td>
-                                            <td><span class="text-danger">{{$vente->caissier}}</span></td>
-                                            <td><span class="text-danger"><i class="fa fa-pencil text-success"></i> <i class="fa fa-archive" style="margin-left:10px;"></i></span></td>
-                                        </tr>
+                                            <td><span  style="color:#098ddf;text-transform:uppercase">{{$vente->caissier}}</span></td>
+                                            @if (Auth()->User()->role == "admin")
+                                            <td style="text-align:center;"><span class="text-danger text-center" ><i class="fa fa-pencil text-success"></i> </span></td>
+                                            @endif                                            
+                                        </tr> 
+                                        
                                         @endforeach
+                                        <tr style="background-color: rgb(228, 228, 228);color:black">
+                                            <td>TOTAUX</td>                              
+                                            <td></td>                              
+                                            <td>{{$sommo}}</td>                              
+                                            <td>{{$somme}} FCFA</td>                              
+                                            <td></td>                              
+                                            <td></td>                              
+                                            <td></td>                              
+                                          </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -166,7 +182,7 @@
              
                             <div class="form-group">
                                 
-                                    <button  type="submit" style="background-color: green;width:100%;color:white;" class="btn" style="width: 100%;padding-top:10px;padding-bottom:15px;">
+                                    <button  type="submit" style="background-color: #098ddf;width:100%;color:white;" class="btn" style="width: 100%;padding-top:15px;padding-bottom:15px;">
                                        CRÉER UNE VENTE
                                     </button>
                             </div>
@@ -179,6 +195,36 @@
                     
                 </div>
             </div>
+
+            <script>
+                let ctxLine,
+                    ctxBar,
+                    ctxPie,
+                    optionsLine,
+                    optionsBar,
+                    optionsPie,
+                    configLine,
+                    configBar,
+                    configPie,
+                    lineChart;
+                barChart, pieChart;
+                // DOM is ready
+                $(function () {
+                    updateChartOptions();
+                    drawLineChart(); // Line Chart
+                    drawBarChart(); // Bar Chart
+                    drawPieChart(); // Pie Chart
+                    drawCalendar(); // Calendar
+        
+                    $(window).resize(function () {
+                        updateChartOptions();
+                        updateLineChart();
+                        updateBarChart();
+                        reloadPage();
+                    });
+                })
+            </script>
+            <script src="js/Chart.min.js"></script>
 
             @endsection
             

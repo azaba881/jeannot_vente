@@ -22,3 +22,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/utilisateur', [App\Http\Controllers\HomeController::class, 'user'])->name('utilisateur');
 Route::post('/vente', [App\Http\Controllers\VenteController::class, 'store'])->name('vente');
+Route::get('/utilisateur/{$id}', [App\Http\Controllers\VenteController::class, 'desactive'])->name('desactive');

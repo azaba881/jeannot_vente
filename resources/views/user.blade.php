@@ -42,7 +42,6 @@
                                             <th>EMAIL</th>
                                             <th>TYPE D'UTILISATEUR</th>
                                             <th>DATE D'ENREGISTREMENT</th>
-                                            <th>ACTION</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,10 +50,9 @@
                                         <tr>
                                             <td>{{$user->id}}</td>
                                             <td class="txt-oflo" ><span style="text-transform:uppercase;">{{$user->name}} {{$user->prenom}}</span></td>
-                                            <td>{{$user->email}}</td>
-                                            <td class="txt-oflo">{{$user->statut}}</td>
+                                            <td style="text-transform: uppercase">{{$user->email}}</td>
+                                            <td class="txt-oflo" style="text-transform: uppercase">{{$user->role}}</td>
                                             <td><span class="" style="text-transform:uppercase;">{{$user->created_at}}</span></td>
-                                            <td><span class="text-danger"><i class="fa fa-pencil text-success"></i> <i class="fa fa-archive" style="margin-left:10px;"></i></span></td>
                                         </tr>
                                         @endforeach
                                     </tbody>

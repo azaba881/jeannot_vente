@@ -17,7 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('prenom');
-            $table->string('statut')->default('active');
+            $table->string('statut')->default('active'); 
+            $table->string('role')->default('caissier');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

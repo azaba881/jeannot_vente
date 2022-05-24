@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class VenteController extends Controller
+class VenteController extends Controller 
 {
 
     public function __construct()
@@ -24,6 +24,14 @@ class VenteController extends Controller
         $vente->caissier = Auth::user()->name.' | '.Auth::user()->prenom;
         $vente->save();
         return redirect('/home'); 
+    }
+
+    public function desactive($id)
+    {        
+        DB::table('users')
+                     ->where('id', $id) 
+                     ->update(['statut' => 'desactive']);          
+        return dd('hello'); 
     }
 
 

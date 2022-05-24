@@ -54,12 +54,8 @@
             <div class="navbar-header" style="background-color: rgb(6, 164, 255);">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="index.html">
-                        <!-- Logo icon image, you can use font-icon also --><b>
-                        <!--This is dark logo icon--><img src="plugins/images/admin-logo.png" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
-                     </b>
-                        <!-- Logo text image you can use text also --><span class="hidden-xs">
-                        <!--This is dark logo text--><img src="plugins/images/admin-text.png" alt="home" class="dark-logo" /><!--This is light logo text--><img src="plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
+                   <span class="hidden-xs">
+        <!--This is light logo text--><img src="plugins/images/admin-text-dark.png" width="150" style="margin: 20px" alt="home" class="light-logo" />
                      </span> </a>
                 </div>
                 <!-- /Logo -->
@@ -87,9 +83,13 @@
                     <li style="padding: 70px 0 0;">
                         <a href="{{route('home')}}" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>DASHBOARD</a>
                     </li>
+                    @if (Auth()->User()->role == "admin")
                     <li>
                         <a href="{{route('utilisateur')}}" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>UTILISATEURS</a>
                     </li>
+                    @else
+                        {{''}}
+                    @endif
                    
                     </li>
                     <li>                        

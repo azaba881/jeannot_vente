@@ -27,14 +27,24 @@ class HomeController extends Controller
     public function index()
     {
         $vente = DB::table('ventes') 
-                 ->where('statut', 'active')
+                 ->where('statut', 'active') 
+                 ->orderBy('created_at','DESC')
                  ->get();
+        $somme = DB::table('ventes') 
+                 ->where('statut', 'active')
+                 ->sum('prix');
+        $sommo = DB::table('ventes') 
+                 ->where('statut', 'active')
+                 ->sum('nombre');
+
+ 
         $ut = DB::table('users')
                  ->get();
         $utilisateur=count($ut);
+
         $stavent=count($vente);
         
-        return view('home',compact(['vente',$vente],['utilisateur',$utilisateur],['stavent',$stavent]));
+        return view('home',compact(['vente',$vente],['somme',$somme],['utilisateur',$utilisateur],['stavent',$stavent],['sommo',$sommo]));
     }
 
     public function user()
